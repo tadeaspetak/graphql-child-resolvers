@@ -6,8 +6,8 @@ generates:
       - typescript-resolvers
     config:
       enumValues:
-        OrgMetricsSignupStatus: ./src/index#OrgMetricsSignupStatus
+        OrgMetricsSignupStatus: ./index#OrgMetricsSignupStatus
       mappers:
-        Org: ./src/index#Org
-        OrgMetrics: ./src/index#Org
-        OrgMetricsSignups: ./src/index#Org
+        Org: ./index#OrgModel
+        OrgMetrics: ./index#OrgModel
+        OrgMetricsSignups: ./index#OrgModel

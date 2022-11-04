@@ -1,19 +1,21 @@
 import { ApolloServer, gql } from "apollo-server";
-import { Resolvers } from "./resolvers-types";
+import { Resolvers, Org as OrgGQL } from "./resolvers-types";
 import { readFileSync } from "node:fs";
 
-enum OrgMetricsSignupStatus {
+export enum OrgMetricsSignupStatus {
   pending = "pending",
   accepted = "accepted",
   rejected = "rejected",
 }
 
-interface Org {
+// export type OrgGQLReturn = Omit<OrgGQL, "metrics">;
+
+export interface OrgModel {
   id: string;
   name: string;
 }
 
-const orgs: Org[] = [
+const orgs: OrgModel[] = [
   { id: "1", name: "first org name" },
   { id: "2", name: "second org name" },
 ];
@@ -52,15 +54,16 @@ const resolvers: Resolvers = {
     },
   },
   Org: {
-    metrics: (parent: Org) => parent, // delegate to deeper resolvers
+    // TODO: how to ensure this with TS?
+    // computed: (parent) => `computed:${parent.id}`,
+    metrics: (parent) => parent, // delegate to deeper resolvers
   },
   OrgMetrics: {
-    impact: (parent: Org) =>
-      impacts.find((i) => i.orgId === parent.id)?.impact ?? 0,
-    signups: (parent: Org) => parent, // delegate to deeper resolvers
+    impact: (parent) => impacts.find((i) => i.orgId === parent.id)?.impact ?? 0,
+    signups: (parent) => parent, // delegate to deeper resolvers
   },
   OrgMetricsSignups: {
-    byStatus: (parent: Org, { statuses }: { statuses: string[] }) => {
+    byStatus: (parent, { statuses }: { statuses: string[] }) => {
       return (
         metrics
           .find((m) => m.orgId === parent.id)

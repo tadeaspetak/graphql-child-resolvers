@@ -1,6 +1,7 @@
 type Org {
   id: ID!
   name: String!
+  computed: String!
   metrics: OrgMetrics!
 }
 

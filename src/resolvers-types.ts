@@ -1,6 +1,6 @@
-import { OrgMetricsSignupStatus } from './src/index';
+import { OrgMetricsSignupStatus } from './index';
 import { GraphQLResolveInfo } from 'graphql';
-import { Org } from './src/index';
+import { OrgModel } from './index';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -19,6 +19,7 @@ export type Scalars = {
 
 export type Org = {
   __typename?: 'Org';
+  computed: Scalars['String'];
   id: Scalars['ID'];
   metrics: OrgMetrics;
   name: Scalars['String'];
@@ -130,10 +131,10 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  Org: ResolverTypeWrapper<Org>;
-  OrgMetrics: ResolverTypeWrapper<Org>;
+  Org: ResolverTypeWrapper<OrgModel>;
+  OrgMetrics: ResolverTypeWrapper<OrgModel>;
   OrgMetricsSignupStatus: OrgMetricsSignupStatus;
-  OrgMetricsSignups: ResolverTypeWrapper<Org>;
+  OrgMetricsSignups: ResolverTypeWrapper<OrgModel>;
   OrgMetricsSignupsResult: ResolverTypeWrapper<OrgMetricsSignupsResult>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -144,15 +145,16 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   ID: Scalars['ID'];
   Int: Scalars['Int'];
-  Org: Org;
-  OrgMetrics: Org;
-  OrgMetricsSignups: Org;
+  Org: OrgModel;
+  OrgMetrics: OrgModel;
+  OrgMetricsSignups: OrgModel;
   OrgMetricsSignupsResult: OrgMetricsSignupsResult;
   Query: {};
   String: Scalars['String'];
 };
 
 export type OrgResolvers<ContextType = any, ParentType extends ResolversParentTypes['Org'] = ResolversParentTypes['Org']> = {
+  computed?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   metrics?: Resolver<ResolversTypes['OrgMetrics'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
