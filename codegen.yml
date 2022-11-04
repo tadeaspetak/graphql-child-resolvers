@@ -1,0 +1,13 @@
+schema: ./src/schema.graphql
+generates:
+  ./src/resolvers-types.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      enumValues:
+        OrgMetricsSignupStatus: ./src/index#OrgMetricsSignupStatus
+      mappers:
+        Org: ./src/index#Org
+        OrgMetrics: ./src/index#Org
+        OrgMetricsSignups: ./src/index#Org

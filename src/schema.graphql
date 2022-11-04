@@ -1,0 +1,29 @@
+type Org {
+  id: ID!
+  name: String!
+  metrics: OrgMetrics!
+}
+
+type OrgMetrics {
+  signups: OrgMetricsSignups!
+  impact: Int!
+}
+
+type OrgMetricsSignups {
+  byStatus(statuses: [OrgMetricsSignupStatus!]!): [OrgMetricsSignupsResult!]
+}
+
+enum OrgMetricsSignupStatus {
+  pending
+  accepted
+  rejected
+}
+
+type OrgMetricsSignupsResult {
+  status: OrgMetricsSignupStatus!
+  count: Int!
+}
+
+type Query {
+  org(id: ID!): Org
+}
