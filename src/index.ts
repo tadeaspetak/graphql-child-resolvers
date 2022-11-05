@@ -7,9 +7,6 @@ export enum OrgMetricsSignupStatus {
   accepted = "accepted",
   rejected = "rejected",
 }
-
-// export type OrgGQLReturn = Omit<OrgGQL, "metrics">;
-
 export interface OrgModel {
   id: string;
   name: string;
@@ -54,7 +51,7 @@ const resolvers: Resolvers = {
     },
   },
   Org: {
-    // TODO: how to ensure this with TS?
+    // TODO: how to make typescript error out on the `computed` property?
     // computed: (parent) => `computed:${parent.id}`,
     metrics: (parent) => parent, // delegate to deeper resolvers
   },
